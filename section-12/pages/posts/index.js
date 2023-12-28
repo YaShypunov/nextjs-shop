@@ -1,41 +1,29 @@
 import React from 'react';
 import AllPosts from '../../components/posts/AllPosts';
+import { getAllPosts } from '../../lib/posts-utils';
+import Head from 'next/head';
 
-const DUMMY_POSTS = [
-  {
-    title: 'Getting Started With NextJS', 
-    image: 'getting-started-nextjs.png', 
-    excerpt: 'NextJS is a React framework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.', 
-    date: '2023-12-10', 
-    slug: 'getting-started-with-nextjs'
-  },
-  {
-    title: 'Getting Started With NextJS', 
-    image: 'getting-started-nextjs.png', 
-    excerpt: 'NextJS is a React framework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.', 
-    date: '2023-12-10', 
-    slug: 'getting-started-with-nextjs2'
-  },
-  {
-    title: 'Getting Started With NextJS', 
-    image: 'getting-started-nextjs.png', 
-    excerpt: 'NextJS is a React framework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.', 
-    date: '2023-12-10', 
-    slug: 'getting-started-with-nextjs3'
-  },
-  {
-    title: 'Getting Started With NextJS', 
-    image: 'getting-started-nextjs.png', 
-    excerpt: 'NextJS is a React framework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.', 
-    date: '2023-12-10', 
-    slug: 'getting-started-with-nextjs4'
-  },
-];
-
-const AllPostsPage = () => {
+const AllPostsPage = ({posts}) => {
   return (
-    <AllPosts posts={DUMMY_POSTS} />
+    <>
+    <Head>
+      <title>All Posts</title>
+      <meta name="description" content="A list of all programming-related tutorials and posts" />
+    </Head>
+    <AllPosts posts={posts} />
+    </>
   );
 };
+
+export const getStaticProps = () => {
+  const posts = getAllPosts();
+
+  return {
+    props: {
+      posts
+    },
+    revalidate: 60,
+  }
+}
 
 export default React.memo(AllPostsPage);

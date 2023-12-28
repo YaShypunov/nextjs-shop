@@ -13,6 +13,12 @@
   color: var(--color-grey-800);
 }
 
+.content img {
+  width: 100%;
+  object-fit: contain;
+  margin: var(--size-4) auto;
+}
+
 .content .image {
   margin: var(--size-4) auto;
   width: 100%;
